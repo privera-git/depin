@@ -8,7 +8,7 @@ import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import java.util.List;
+import java.util.Optional;
 
 @Service
 @Slf4j
@@ -21,33 +21,37 @@ public class ProductService implements IProductService {
     @Override
     public void add(Product product) {
         log.info("Product service: add");
-        repository.add(product);
+        repository.save(product);
     }
 
     @Override
     public void delete(int id) {
         log.info("Product service: delete");
-        repository.delete(id);
+        Optional<Product> product = repository.findById(id);
+        product.ifPresent(value -> repository.delete(value));
     }
 
     @Override
-    public List<Product> getAll() {
+    public Iterable<Product> getAll() {
         log.info("Product service: getAll");
-        return repository.getAll();
+        return repository.findAll();
     }
 
     @Override
     public Product getSingle(int id) {
         log.info("Product service: getSingle");
-        return repository.getSingle(id);
+        return repository.findById(id).orElse(null);
     }
 
     @Override
     public void update(Product product) {
         log.info("Product service: update");
-        var dbProduct = repository.getSingle(product.getId());
-        if (dbProduct != null) {
-            repository.update(product);
+        if (!repository.existsById(product.getId())) {
+            log.info("Product does not exist");
+            return;
         }
+
+        log.info("Saving product");
+        repository.save(product);
     }
 }

@@ -1,14 +1,17 @@
 package cl.privera.depin.domain.entities;
 
+import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 
-@NoArgsConstructor
-@AllArgsConstructor
+@Entity @Table(name = "products")
+@Setter @Getter
+@NoArgsConstructor @AllArgsConstructor
 public class Product {
-    @Getter @Setter private int id;
-    @Getter @Setter private String description;
-    @Getter @Setter private String category;
+    @Id @GeneratedValue(strategy = GenerationType.AUTO)
+    private int id;
+    private String description;
+    private String category;
 }

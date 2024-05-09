@@ -1,6 +1,6 @@
 package cl.privera.depin.infrastructure.repositories;
 
-import cl.privera.depin.domain.abstractions.repositories.IProductRepository;
+import cl.privera.depin.domain.abstractions.repositories.IDummyProductRepository;
 import cl.privera.depin.domain.entities.Product;
 import lombok.AllArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
@@ -10,7 +10,7 @@ import java.util.Arrays;
 import java.util.List;
 
 @Repository @Slf4j @AllArgsConstructor
-public class ProductRepository implements IProductRepository {
+public class DummyDummyProductRepository implements IDummyProductRepository {
 
     @Override
     public void add(Product product) {

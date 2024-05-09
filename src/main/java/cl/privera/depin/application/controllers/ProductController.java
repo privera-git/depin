@@ -6,9 +6,8 @@ import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RestController;
-
-import java.util.List;
 
 @Controller @Slf4j @RestController
 public class ProductController {
@@ -17,8 +16,17 @@ public class ProductController {
     private IProductService service;
 
     @GetMapping("/products")
-    public List<Product> getAll() {
+    public Iterable<Product> getAll() {
         log.info("ProductController: getAll");
         return service.getAll();
+    }
+
+    @GetMapping("/products/{id}")
+    public Product getSingle(@PathVariable Integer id) {
+        log.info("ProductController: get {}", id);
+        var product = service.getSingle(id);
+        log.info("product: {}", product);
+
+        return product;
     }
 }

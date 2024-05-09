@@ -1,13 +1,13 @@
-package cl.privera.depin.domain.abstractions.services;
+package cl.privera.depin.domain.abstractions.repositories;
 
 import cl.privera.depin.domain.entities.Product;
 
 import java.util.List;
 
-public interface IProductService {
+public interface IDummyProductRepository {
     void add(Product product);
     void delete(int id);
-    Iterable<Product> getAll();
+    List<Product> getAll();
     Product getSingle(int id);
     void update(Product product);
 }
