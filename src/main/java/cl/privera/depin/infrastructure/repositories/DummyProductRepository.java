@@ -10,7 +10,7 @@ import java.util.Arrays;
 import java.util.List;
 
 @Repository @Slf4j @AllArgsConstructor
-public class DummyDummyProductRepository implements IDummyProductRepository {
+public class DummyProductRepository implements IDummyProductRepository {
 
     @Override
     public void add(Product product) {
