@@ -1,6 +1,7 @@
 package cl.privera.depin.application.handlers;
 
 import cl.privera.depin.application.abstractions.handlers.IGetAllProductsHandler;
+import cl.privera.depin.application.abstractions.mappers.IProductMapper;
 import cl.privera.depin.application.dtos.ProductDto;
 import cl.privera.depin.domain.abstractions.services.IProductService;
 import cl.privera.depin.domain.entities.Product;
@@ -19,6 +20,9 @@ public class GetAllProductsHandler implements IGetAllProductsHandler {
     @Autowired
     private IProductService service;
 
+    @Autowired
+    private IProductMapper mapper;
+
     @Autowired @Qualifier("fancy")
     private IProductWriter writer;
 
@@ -27,9 +31,6 @@ public class GetAllProductsHandler implements IGetAllProductsHandler {
 
         var entities = service.getAll();
 
-        var products = new ArrayList<ProductDto>();
-        entities.forEach(e -> products.add(new ProductDto(e.getId(), e.getDescription(), e.getCategory())));
-
-        return products;
+        return mapper.map(entities);
     }
 }

@@ -1,6 +1,7 @@
 package cl.privera.depin.application.handlers;
 
 import cl.privera.depin.application.abstractions.handlers.IAddProductHandler;
+import cl.privera.depin.application.abstractions.mappers.IProductMapper;
 import cl.privera.depin.application.dtos.AddProductDto;
 import cl.privera.depin.application.dtos.ProductDto;
 import cl.privera.depin.application.writers.IProductWriter;
@@ -18,15 +19,14 @@ public class AddProductHandler implements IAddProductHandler {
     @Autowired
     private IProductService service;
 
+    @Autowired
+    private IProductMapper mapper;
+
     public ProductDto handle(AddProductDto request) {
         log.info("AddProductHandler: handle");
-
-        var entity = new Product();
-        entity.setDescription(request.description());
-        entity.setCategory(request.category());
-
+        var entity = mapper.map(request);
         service.add(entity);
 
-        return new ProductDto(entity.getId(), entity.getDescription(), entity.getCategory());
+        return mapper.map(entity);
     }
 }

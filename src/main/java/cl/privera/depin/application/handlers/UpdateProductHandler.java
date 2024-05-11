@@ -2,6 +2,7 @@ package cl.privera.depin.application.handlers;
 
 import cl.privera.depin.application.abstractions.handlers.IAddProductHandler;
 import cl.privera.depin.application.abstractions.handlers.IUpdateProductHandler;
+import cl.privera.depin.application.abstractions.mappers.IProductMapper;
 import cl.privera.depin.application.dtos.AddProductDto;
 import cl.privera.depin.application.dtos.ProductDto;
 import cl.privera.depin.application.writers.IProductWriter;
@@ -19,16 +20,14 @@ public class UpdateProductHandler implements IUpdateProductHandler {
     @Autowired
     private IProductService service;
 
+    @Autowired
+    private IProductMapper mapper;
+
     public ProductDto handle(ProductDto request) {
         log.info("UpdateProductHandler: handle");
-
-        var entity = new Product();
-        entity.setId(request.id());
-        entity.setDescription(request.description());
-        entity.setCategory(request.category());
-
+        var entity = mapper.map(request);
         service.update(entity);
 
-        return new ProductDto(entity.getId(), entity.getDescription(), entity.getCategory());
+        return mapper.map(entity);
     }
 }
