@@ -1,14 +1,10 @@
 package cl.privera.depin.application.handlers;
 
 import cl.privera.depin.application.abstractions.handlers.IDeleteProductHandler;
-import cl.privera.depin.application.abstractions.handlers.IGetProductHandler;
 import cl.privera.depin.application.abstractions.mappers.IProductMapper;
-import cl.privera.depin.application.dtos.ProductDto;
-import cl.privera.depin.application.writers.IProductWriter;
 import cl.privera.depin.domain.abstractions.services.IProductService;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Component;
 
 @Component

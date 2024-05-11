@@ -1,8 +1,6 @@
 package cl.privera.depin.presentation.controllers;
 
-import cl.privera.depin.application.abstractions.handlers.IAddProductHandler;
 import cl.privera.depin.application.abstractions.handlers.IUpdateProductHandler;
-import cl.privera.depin.application.dtos.AddProductDto;
 import cl.privera.depin.application.dtos.ProductDto;
 import cl.privera.depin.application.dtos.UpdateProductDto;
 import lombok.extern.slf4j.Slf4j;
