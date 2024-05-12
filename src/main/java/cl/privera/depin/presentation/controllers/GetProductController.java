@@ -2,7 +2,6 @@ package cl.privera.depin.presentation.controllers;
 
 import cl.privera.depin.application.abstractions.handlers.IGetProductHandler;
 import cl.privera.depin.application.dtos.ProductDto;
-import cl.privera.depin.presentation.exceptions.EntityNotFoundException;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
@@ -22,7 +21,7 @@ public class GetProductController {
         log.info("ProductController: get {}", id);
         var dto = getProductHandler.handle(id);
         if (dto == null) {
-            ResponseEntity.notFound();
+            return ResponseEntity.notFound().build();
         }
 
         return ResponseEntity.ok(dto);
